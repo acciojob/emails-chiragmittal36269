@@ -35,11 +35,11 @@ public class Gmail extends Email {
     //Inbox: Stores mails. Each mail has date (Date), sender (String), message (String). It is guaranteed that message is distinct for all mails.
     //Trash: Stores mails. Each mail has date (Date), sender (String), message (String)
 
-//    private ArrayList<Triple<Date, String, String>> Inbox;
-//    private ArrayList<Triple<Date, String, String>> Trash;
+    private ArrayList<Triple<Date, String, String>> Inbox;
+    private ArrayList<Triple<Date, String, String>> Trash;
 
-    private ArrayList<Mail> Inbox;
-    private ArrayList<Mail> Trash;
+//    private ArrayList<Mail> Inbox;
+//    private ArrayList<Mail> Trash;
 
 //        ArrayList<Email> trash;
     public Gmail(String emailId, int inboxCapacity) {
@@ -61,11 +61,11 @@ public class Gmail extends Email {
             Trash.add(Inbox.remove(0));
         }
 
-        Inbox.add(new Mail(date, sender, message));
+//        Inbox.add(new Mail(date, sender, message));
 
 //        Triple<Date, String, String> mail = Triple.of(date, sender, message);
 //        Inbox.add(mail);
-//        Inbox.add(Triple.of(date, sender, message));
+        Inbox.add(Triple.of(date, sender, message));
     }
 
     public void deleteMail(String message) {
@@ -74,7 +74,7 @@ public class Gmail extends Email {
 
         int index = -1;
         for (int i = 0; i < Inbox.size(); i++) {
-            if (message.equals(Inbox.get(i).getMessage())) {
+            if (message.equals(Inbox.get(i).getRight())) {
                 index = i;
                 break;
             }
@@ -93,7 +93,7 @@ public class Gmail extends Email {
         if (Inbox.size() == 0) {
             return "null";
         } else {
-            return Inbox.get(Inbox.size() - 1).getMessage();
+            return Inbox.get(Inbox.size() - 1).getRight();
         }
     }
 
@@ -104,7 +104,7 @@ public class Gmail extends Email {
         if (Inbox.size() == 0) {
             return "null";
         } else {
-            return Inbox.get(0).getMessage();
+            return Inbox.get(0).getRight();
         }
     }
 
@@ -120,8 +120,8 @@ public class Gmail extends Email {
 //        }
 //        return count;
 
-        for (Mail inbox : Inbox) {
-            if ((inbox.getDate().compareTo(start) >= 0) && (inbox.getDate().compareTo(end) <= 0)) {
+        for (Triple<Date, String, String> inbox : Inbox) {
+            if ((inbox.getLeft().compareTo(start) >= 0) && (inbox.getLeft().compareTo(end) <= 0)) {
                 count++;
             }
         }
