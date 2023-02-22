@@ -29,37 +29,36 @@ public class Email {
 
         if (oldPassword.equals(password)) {
             if (isValid(newPassword)) {
-                System.out.println("Password updated successfully");
+                System.out.println("Password updated successfully!");
                 this.password = newPassword;
             } else {
-                System.out.println("The new password is not match with the requirements");
+                System.out.println("The new password is not match with the requirements!");
             }
         } else {
-            System.out.println("The old password does not match with the current password");
+            System.out.println("The old password does not match with the current password!");
         }
     }
 
-    public boolean isValid(String password) {
-        boolean capitalLetter = false;
-        boolean smallLetter = false;
-        boolean digit = false;
-        boolean specialCharacter = false;
+    public Boolean isValid(String password) {
+        Boolean capitalLetter = false;
+        Boolean smallLetter = false;
+        Boolean digit = false;
+        Boolean specialCharacter = false;
 
         if (password.length() < 8) {
             return false;
-        } else {
-            for (int i = 0; i < password.length(); i++) {
-                if (password.charAt(i) >= 'A' && password.charAt(i) <= 'Z') {
-                    capitalLetter = true;
-                } else if (password.charAt(i) >= 'a' && password.charAt(i) <= 'z') {
-                    smallLetter = true;
-                } else if (password.charAt(i) >= '0' && password.charAt(i) <= 9) {
-                    digit = true;
-                } else {
-                    specialCharacter = true;
-                }
-            }
-            return capitalLetter && smallLetter && digit && specialCharacter;
         }
+        for (int i = 0; i < password.length(); i++) {
+            if (password.charAt(i) >= 'A' && password.charAt(i) <= 'Z') {
+                capitalLetter = true;
+            } else if (password.charAt(i) >= 'a' && password.charAt(i) <= 'z') {
+                smallLetter = true;
+            } else if (password.charAt(i) >= '0' && password.charAt(i) <= '9') {
+                digit = true;
+            } else {
+                specialCharacter = true;
+            }
+        }
+        return capitalLetter && smallLetter && digit && specialCharacter;
     }
 }
