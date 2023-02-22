@@ -5,29 +5,29 @@ import org.apache.commons.lang3.tuple.Triple;
 import java.util.ArrayList;
 import java.util.Date;
 
-//class Mail{
-//    private Date date;
-//    private String sender;
-//    private String message;
+class Mail {
+    private Date date;
+    private String sender;
+    private String message;
 
-//    public Mail(Date date, String sender, String message) {
-//        this.date = date;
-//        this.sender = sender;
-//        this.message = message;
-//    }
+    public Mail(Date date, String sender, String message) {
+        this.date = date;
+        this.sender = sender;
+        this.message = message;
+    }
 
-//    public Date getDate() {
-//        return date;
-//    }
-//
-//    public String getSender() {
-//        return sender;
-//    }
-//
-//    public String getMessage() {
-//        return message;
-//    }
-//}
+    public Date getDate() {
+        return date;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}
 
 public class Gmail extends Email {
 
@@ -35,11 +35,11 @@ public class Gmail extends Email {
     //Inbox: Stores mails. Each mail has date (Date), sender (String), message (String). It is guaranteed that message is distinct for all mails.
     //Trash: Stores mails. Each mail has date (Date), sender (String), message (String)
 
-    private ArrayList<Triple<Date, String, String>> Inbox;
-    private ArrayList<Triple<Date, String, String>> Trash;
+//    private ArrayList<Triple<Date, String, String>> Inbox;
+//    private ArrayList<Triple<Date, String, String>> Trash;
 
-//    private ArrayList<Mail> Inbox;
-//    private ArrayList<Mail> Trash;
+    private ArrayList<Mail> Inbox;
+    private ArrayList<Mail> Trash;
 
 //        ArrayList<Email> trash;
     public Gmail(String emailId, int inboxCapacity) {
@@ -66,7 +66,8 @@ public class Gmail extends Email {
 
 //        Triple<Date, String, String> mail = Triple.of(date, sender, message);
 //        Inbox.add(mail);
-        Inbox.add(Triple.of(date, sender, message));
+//        Inbox.add(Triple.of(date, sender, message));
+        Inbox.add(new Mail(date,sender,message));
     }
 
     public void deleteMail(String message) {
@@ -75,7 +76,7 @@ public class Gmail extends Email {
 
         int index = -1;
         for (int i = 0; i < Inbox.size(); i++) {
-            if (message.equals(Inbox.get(i).getRight())) {
+            if (message.equals(Inbox.get(i).getMessage())) {
                 index = i;
                 break;
             }
@@ -94,7 +95,7 @@ public class Gmail extends Email {
         if (Inbox.size() == 0) {
             return null;
         } else {
-            return Inbox.get(Inbox.size() - 1).getRight();
+            return Inbox.get(Inbox.size() - 1).getMessage();
         }
     }
 
@@ -105,7 +106,7 @@ public class Gmail extends Email {
         if (Inbox.isEmpty()) {
             return null;
         } else {
-            return Inbox.get(0).getRight();
+            return Inbox.get(0).getMessage();
         }
     }
 
@@ -121,8 +122,8 @@ public class Gmail extends Email {
 //        }
 //        return count;
 
-        for (Triple<Date, String, String> inbox : Inbox) {
-            if ((inbox.getLeft().compareTo(start) >= 0) && (inbox.getLeft().compareTo(end) <= 0)) {
+        for (Mail inbox : Inbox) {
+            if ((inbox.getDate().compareTo(start) >= 0) && (inbox.getDate().compareTo(end) <= 0)) {
                 count++;
             }
         }
