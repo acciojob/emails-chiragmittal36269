@@ -93,7 +93,7 @@ public class Gmail extends Email {
         // Else, return the message of the latest mail present in the inbox
 
         if (Inbox.size() == 0) {
-            return null;
+            return "null";
         } else {
             return Inbox.get(Inbox.size() - 1).getMessage();
         }
@@ -104,7 +104,7 @@ public class Gmail extends Email {
         // Else, return the message of the oldest mail present in the inbox
 
         if (Inbox.isEmpty()) {
-            return null;
+            return "null";
         } else {
             return Inbox.get(0).getMessage();
         }
