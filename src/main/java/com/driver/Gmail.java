@@ -55,18 +55,18 @@ public class Gmail extends Email {
         // 1. Each mail in the inbox is distinct.
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
 
-        if (Inbox.size() == inboxCapacity) {
-            Triple<Date, String, String> oldestMail = Inbox.get(0);
-            Inbox.remove(0);
-            Trash.add(oldestMail);
-//            Trash.add(Inbox.remove(0));
+        if (Inbox.size() == this.inboxCapacity) {
+//            Triple<Date, String, String> oldestMail = Inbox.get(0);
+//            Inbox.remove(0);
+//            Trash.add(oldestMail);
+            Trash.add(Inbox.remove(0));
         }
 
 //        Inbox.add(new Mail(date, sender, message));
 
-        Triple<Date, String, String> mail = Triple.of(date, sender, message);
-        Inbox.add(mail);
-//        Inbox.add(Triple.of(date, sender, message));
+//        Triple<Date, String, String> mail = Triple.of(date, sender, message);
+//        Inbox.add(mail);
+        Inbox.add(Triple.of(date, sender, message));
     }
 
     public void deleteMail(String message) {
@@ -91,7 +91,7 @@ public class Gmail extends Email {
         // If the inbox is empty, return null
         // Else, return the message of the latest mail present in the inbox
 
-        if (Inbox.isEmpty()) {
+        if (Inbox.size() == 0) {
             return null;
         } else {
             return Inbox.get(Inbox.size() - 1).getRight();
@@ -114,19 +114,19 @@ public class Gmail extends Email {
         //It is guaranteed that start date <= end date
 
         int count = 0;
-        for (int i = 0; i < Inbox.size(); i++) {
-            if ((Inbox.get(i).getLeft().compareTo(start) >= 0) && (Inbox.get(i).getLeft().compareTo(end) <= 0)) {
-                count++;
-            }
-        }
-        return count;
-
-//        for (Triple<Date, String, String> inbox : Inbox) {
-//            if ((inbox.getLeft().compareTo(start) >= 0) && (inbox.getLeft().compareTo(end) <= 0)) {
+//        for (int i = 0; i < Inbox.size(); i++) {
+//            if ((Inbox.get(i).getLeft().compareTo(start) >= 0) && (Inbox.get(i).getLeft().compareTo(end) <= 0)) {
 //                count++;
 //            }
 //        }
 //        return count;
+
+        for (Triple<Date, String, String> inbox : Inbox) {
+            if ((inbox.getLeft().compareTo(start) >= 0) && (inbox.getLeft().compareTo(end) <= 0)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public int getInboxSize() {
@@ -150,6 +150,6 @@ public class Gmail extends Email {
     public int getInboxCapacity() {
         // Return the maximum number of mails that can be stored in the inbox
 
-        return inboxCapacity;
+        return this.inboxCapacity;
     }
 }
